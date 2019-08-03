@@ -1,26 +1,43 @@
+/*
+  This file holds my main application logic
+*/
+
+// Import React and styling into scope
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Import Converter and Game components
+import Converter from "./Components/Converter.jsx"
+import Game from "./Components/Game.jsx"
+
+// App component
+class App extends React.Component {
+  // Set initial state
+  state = {
+    current: "convert"
+  }
+
+  render() {
+    return (
+      // Render with react fragment
+      <React.Fragment>
+        {/* Selectbox which updates state when changed */}
+        <select onChange={e => this.setState({current: e.target.value})}>
+          <option value="convert">Currency converter</option>
+          <option value="win">Win</option>
+        </select>
+
+        {/* Immediate-invoked method that contains a switch to render components */}
+        {(() => {
+          switch(this.state.current) {
+            case "convert": return <Converter />
+            case "win": return <Game />
+            default: {}
+          }
+        })()}
+      </React.Fragment>
+    )
+  }
 }
 
 export default App;
