@@ -13,7 +13,7 @@ export const CardProvider = CardContext.Provider
 export const CardConsumer = CardContext.Consumer
 
 // Card component
-export class Card extends React.Component {
+export default class Card extends React.Component {
 	// Get our context
 	static contextType = CardContext
 
