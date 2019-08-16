@@ -10,94 +10,76 @@ import GameBody from "../StyledComponents/Game.jsx"
 
 // Import card generator and context, and endscreen context
 import {Generate as GenerateCards, CardProvider} from "./GameCard.jsx"
-import EndScreen, {EndScreenProvider} from "./GameEndScreen.jsx"
+import EndScreen, {Context as EndScreenContext} from "./GameEndScreen.jsx"
 
 // Convert component
-export default class Game extends React.Component {
+export default function Game() {
     // Initial state
-    state = {
-        // The winning card
-        winningCard: Math.floor(Math.random() * 3) + 1,
+    const [winner, setWinner] = React.useState(Math.floor(Math.random() * 3) + 1)
+    const [selected, selectCard] = React.useState(0)
+    const [displayStatus, setDisplayStatus] = React.useState(false)
+    const [resetCards, setReset] = React.useState(false)
 
-        // The currently selected card
-        selectedCard: 0,
-
-        // Whether to show winning screen
-        showWinState: false,
-
-        // Reset cards
-        reset: false
-    }
-
-    // Play a card
-    // Takes card number as argument
-    playCard = number => {
-        // Set selected card to number of card
-        this.setState({
-            selectedCard: number
-        })
-
-        // After 1.5s, set the showWinState to true
-        setTimeout(() => {
-            this.setState({ showWinState : true })
-        }, 1500)
-    }
 
     // Reset game
-    reset = () => {
-        this.setState({
-            winningCard: Math.floor(Math.random() * 3) + 1,
-            selectedCard: 0,
-            showWinState: false,
-
-            // Toggle reset
-            reset: true
-        }, () => this.setState({
-            // Toggle reset after initial reset
-            reset: false
-        }))
+    const reset = () => {
+        setWinner(Math.floor(Math.random() * 3) + 1)
+        selectCard(0)
+        setDisplayStatus(false)
+        setReset(true)
     }
 
+    React.useEffect(() => {
+        if(resetCards) {
+            setReset(false)
+        }
+    }, [resetCards])
+
     // Card component context
-    getCardContext = () => {
-        return {
-            // Winning card
-            winner: this.state.winningCard,
+    const cardContext = {
+        // Winning card
+        winner,
 
-            // If played
-            played: this.state.selectedCard > 0,
+        // If resetting
+        reset: resetCards,
 
-            // Play the card into parent
-            play: this.playCard,
+        // If played
+        played: selected > 0,
 
-            // If resetting
-            reset: this.state.reset
+        // Play the card into parent
+        // Takes card number as argument
+        play: number => {
+            // Set selected card to number of card
+            selectCard(number)
+
+            // After 1.5s, set the showWinState to true
+            setTimeout(() => {
+                setDisplayStatus(true)
+            }, 1500)
         }
     }
 
     // End screen component context
-    getEndScreenContext = () => ({
+    const endScreenContextValue = {
         // Selected card
-        selected: this.state.selectedCard,
+        selected,
 
         // Winning card
-        winner: this.state.winningCard
-    })
-
-    render() {
-        return (
-            // Render our div.game container
-            <GameBody>
-                {/* Generate our 3 cards */}
-                <CardProvider value={this.getCardContext()}>
-                    {GenerateCards(3)}
-                </CardProvider>
-
-                {/* Generate end screen */}
-                <EndScreenProvider value={this.getEndScreenContext()}>
-                    <EndScreen show={this.state.showWinState} reset={this.reset} />
-                </EndScreenProvider>
-            </GameBody>
-        )
+        winner
     }
+
+    return (
+        // Render our div.game container
+        <GameBody>
+            {/* Generate our 3 cards */}
+            <CardProvider value={cardContext}>
+                {GenerateCards(3)}
+            </CardProvider>
+
+            {/* Generate end screen */}
+            <EndScreenContext.Provider value={endScreenContextValue}>
+                <EndScreen show={displayStatus} reset={reset} />
+            </EndScreenContext.Provider>
+        </GameBody>
+    )
 }

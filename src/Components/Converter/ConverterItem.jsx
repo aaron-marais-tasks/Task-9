@@ -16,41 +16,36 @@ export const ItemProvider = ItemContext.Provider
 export const ItemConsumer = ItemContext.Consumer
 
 // Item component
-export default class Item extends React.Component {
-    // Our component context type
-    static contextType = ItemContext
+export default function Item(props) {
+    const context = React.useContext(ItemContext)
 
     // Calculate amount based on context
-    getTotalAmount = () => {
-        // First try to convert to float (int strips after dot)
-        let currentInAud = parseFloat(this.context.amount)
+    // First try to convert to float (int strips after dot)
+    let currentInAud = parseFloat(context.amount)
 
-        // If is not a number, try and convert to integer
-        if(Number.isNaN(currentInAud))
-            currentInAud = parseInt(this.context.amount)
+    // If is not a number, try and convert to integer
+    if(Number.isNaN(currentInAud))
+        currentInAud = parseInt(context.amount)
 
-        // If still not a number, set to zero
-        if(Number.isNaN(currentInAud))
-            currentInAud = 0
+    // If still not a number, set to zero
+    if(Number.isNaN(currentInAud))
+        currentInAud = 0
 
-        // Calculate and return converted amount
-        return currentInAud * this.props.factor
-    }
+    // Calculate and return converted amount
+    const total = currentInAud * props.factor
 
-    render() {
-        return (
-            // Div to hold item
-            <ConverterItem>
-                {/* Item title */}
-                <span className="title">
-                    {this.props.title}
-                </span>
+    return (
+        // Div to hold item
+        <ConverterItem>
+            {/* Item title */}
+            <span className="title">
+                {props.title}
+            </span>
 
-                {/* Converted amount */}
-                <span className="amount">
-                    {this.props.symbol + " " + this.getTotalAmount().toFixed(2)}
-                </span>
-            </ConverterItem>
-        )
-    }
+            {/* Converted amount */}
+            <span className="amount">
+                {props.symbol + " " + total.toFixed(2)}
+            </span>
+        </ConverterItem>
+    )
 }

@@ -10,33 +10,30 @@ import Converter from "./Components/Converter"
 import Game from "./Components/Game"
 
 // App component
-class App extends React.Component {
+function App() {
   // Set initial state
-  state = {
-    current: "convert"
+  const [current, setCurrent] = React.useState("convert")
+
+  // Switch to render components
+  let currentItem
+  switch(current) {
+    case "convert": currentItem = <Converter />; break
+    case "win": currentItem = <Game />; break
+    default: {}
   }
 
-  render() {
-    return (
-      // Render with react fragment
-      <React.Fragment>
-        {/* Selectbox which updates state when changed */}
-        <select onChange={e => this.setState({current: e.target.value})}>
-          <option value="convert">Currency converter</option>
-          <option value="win">Win</option>
-        </select>
+  return (
+    // Render with react fragment
+    <React.Fragment>
+      {/* Selectbox which updates state when changed */}
+      <select onChange={e => setCurrent(e.target.value)}>
+        <option value="convert">Currency converter</option>
+        <option value="win">Win</option>
+      </select>
 
-        {/* Immediate-invoked method that contains a switch to render components */}
-        {(() => {
-          switch(this.state.current) {
-            case "convert": return <Converter />
-            case "win": return <Game />
-            default: {}
-          }
-        })()}
-      </React.Fragment>
-    )
-  }
+      {currentItem}
+    </React.Fragment>
+  )
 }
 
 export default App;

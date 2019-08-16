@@ -9,45 +9,33 @@ import React from "react"
 import EndScreenContainer from "../StyledComponents/GameEndScreen.jsx"
 
 // Create screen context
-const ScreenContext = React.createContext({})
-
-// Export provider and (optional use) consumer
-export const EndScreenProvider = ScreenContext.Provider
-export const EndScreenConsumer = ScreenContext.Consumer
+export const Context = React.createContext({})
 
 // Generate the win status. Only show when showWinState is set to true
-export default class EndScreen extends React.Component {
-    // End screen context
-    static contextType = ScreenContext
+export default function EndScreen(props) {
+    const context = React.useContext(Context)
+
+    // If not shown, return null
+    if(!props.show) return null
 
     // Get text if won or lost
-    getWinText = () => {
-        // If selected card is winning card, return winner
-        if(this.context.selected === this.context.winner)
-            return "Winner!"
+    const getWinText = context.selected === context.winner ? "Winner!" : "Loser!"
+    const goHome = () => window.location = "https://google.com/search?q=other+card+games"
 
-        return "Loser!"
-    }
+    return (
+        <EndScreenContainer>
+            {/* Our div.winText holds information on if user is winner or loser */}
+            <div className="winText">{getWinText}</div>
 
-    render() {
-    	// If not shown, return null
-    	if(!this.props.show) return null
+            {/* Button for Try Again. When clicked, resets game */}
+            <button onClick={props.reset}>
+                Try Again
+            </button>
 
-        return (
-            <EndScreenContainer>
-                {/* Our div.winText holds information on if user is winner or loser */}
-                <div className="winText">{this.getWinText()}</div>
-
-                {/* Button for Try Again. When clicked, resets game */}
-                <button onClick={this.props.reset}>
-                    Try Again
-                </button>
-
-                {/* Button to quit. Goes to Google. */}
-                <button onClick={() => window.location = "https://google.com/search?q=other+card+games"}>
-                    Quit
-                </button>
-            </EndScreenContainer>
-        )
-    }
+            {/* Button to quit. Goes to Google. */}
+            <button onClick={goHome}>
+                Quit
+            </button>
+        </EndScreenContainer>
+    )
 }
