@@ -6,7 +6,7 @@
 import React from "react"
 
 // Import game body's styling
-import GameBody from "./StyledComponents/Game.jsx"
+import GameBody from "../StyledComponents/Game.jsx"
 
 // Import card generator and context, and endscreen context
 import {Generate as GenerateCards, CardProvider} from "./GameCard.jsx"

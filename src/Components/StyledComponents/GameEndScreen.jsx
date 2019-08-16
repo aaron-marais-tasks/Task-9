@@ -1,3 +1,8 @@
+/*
+    This file holds the styling for our game's ending screen
+*/
+
+// Import styled component library
 import styled, { css } from 'styled-components'
 
 // End screen text styling

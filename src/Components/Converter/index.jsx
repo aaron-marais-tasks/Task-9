@@ -5,6 +5,9 @@
 // Import React into scope
 import React from "react"
 
+// Import our styled component
+import ConverterContainer from "../StyledComponents/Converter.jsx"
+
 // Import our item component and its context
 import Item, { ItemProvider } from "./ConverterItem.jsx"
 
@@ -22,8 +25,8 @@ export default class extends React.Component {
 
     render() {
         return (
-            // div.converter container
-            <div className="converter">
+            // Converter container
+            <ConverterContainer>
                 {/* Input dollar amount */}
                 Australian Dollar Amount:
 
@@ -34,11 +37,11 @@ export default class extends React.Component {
                 {/* Our items' context provider */}
                 <ItemProvider value={this.getItemContext()}>
                     {/* Converting to ZAR, GBP and EUR (rates as of 03/08/2019) */}
-                    <Item title="South African Rands" factor={10.06} />
-                    <Item title="Great British Pound" factor={0.56} />
-                    <Item title="Euro" factor={0.61} />
+                    <Item symbol="R" title="South African Rands" factor={10.06} />
+                    <Item symbol="£" title="Great British Pound" factor={0.56} />
+                    <Item symbol="€" title="Euro" factor={0.61} />
                 </ItemProvider>
-            </div>
+            </ConverterContainer>
         )
     }
 }

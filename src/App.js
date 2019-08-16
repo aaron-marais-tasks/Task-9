@@ -6,8 +6,8 @@
 import React from 'react';
 
 // Import Converter and Game components
-import Converter from "./Components/Converter.jsx"
-import Game from "./Components/Game.jsx"
+import Converter from "./Components/Converter"
+import Game from "./Components/Game"
 
 // App component
 class App extends React.Component {

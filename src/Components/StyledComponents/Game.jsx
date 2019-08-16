@@ -1,3 +1,8 @@
+/*
+    This file holds my game box styling
+*/
+
+// Import styled component library
 import styled from 'styled-components'
 
 // Game box styling

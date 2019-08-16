@@ -1,5 +1,11 @@
+/*
+  This file holds the styling for the game cards
+*/
+
+// Import styled component library
 import styled, { keyframes, css } from 'styled-components'
 
+// Keyframes are used for CSS animations
 const CardKeyframes = keyframes`
   0% {
     transform: scale(1) rotateY(0deg);

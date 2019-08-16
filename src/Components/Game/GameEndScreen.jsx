@@ -6,7 +6,7 @@
 import React from "react"
 
 // Import our styled elements
-import EndScreenContainer from "./StyledComponents/GameEndScreen.jsx"
+import EndScreenContainer from "../StyledComponents/GameEndScreen.jsx"
 
 // Create screen context
 const ScreenContext = React.createContext({})

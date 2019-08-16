@@ -5,6 +5,9 @@
 // Import React into scopes
 import React from "react"
 
+// Import styled elements
+import ConverterItem from "../StyledComponents/ConverterItem.jsx"
+
 // Create item context
 const ItemContext = React.createContext({})
 
@@ -37,7 +40,7 @@ export default class Item extends React.Component {
     render() {
         return (
             // Div to hold item
-            <div className="item">
+            <ConverterItem>
                 {/* Item title */}
                 <span className="title">
                     {this.props.title}
@@ -45,9 +48,9 @@ export default class Item extends React.Component {
 
                 {/* Converted amount */}
                 <span className="amount">
-                    {this.getTotalAmount().toFixed(2)}
+                    {this.props.symbol + " " + this.getTotalAmount().toFixed(2)}
                 </span>
-            </div>
+            </ConverterItem>
         )
     }
 }

@@ -6,7 +6,7 @@
 import React from "react"
 
 // Import our styled components
-import CardContainer, {Selected as SelectedCard} from "./StyledComponents/GameCard.jsx"
+import CardContainer, {Selected as SelectedCard} from "../StyledComponents/GameCard.jsx"
 
 // Create card context
 const CardContext = React.createContext({})
