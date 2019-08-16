@@ -2,9 +2,8 @@
   This file holds my main application logic
 */
 
-// Import React and styling into scope
+// Import React into scope
 import React from 'react';
-import './App.css';
 
 // Import Converter and Game components
 import Converter from "./Components/Converter.jsx"

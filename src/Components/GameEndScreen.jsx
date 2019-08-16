@@ -1,9 +1,12 @@
 /*
-	This file holds the game end screen conditions
+    This file holds the game end screen conditions
 */
 
 // Import React into scope
 import React from "react"
+
+// Import our styled elements
+import EndScreenContainer from "./StyledComponents/GameEndScreen.jsx"
 
 // Create screen context
 const ScreenContext = React.createContext({})
@@ -14,45 +17,37 @@ export const EndScreenConsumer = ScreenContext.Consumer
 
 // Generate the win status. Only show when showWinState is set to true
 export default class EndScreen extends React.Component {
-	static contextType = ScreenContext
+    // End screen context
+    static contextType = ScreenContext
 
-	// Class name for div
-	getClassName = () => {
-		// Base class name
-		let className = "status"
+    // Get text if won or lost
+    getWinText = () => {
+        // If selected card is winning card, return winner
+        if(this.context.selected === this.context.winner)
+            return "Winner!"
 
-		// Add the hidden class if not shown
-		if(!this.props.show)
-			className += " hidden"
+        return "Loser!"
+    }
 
-		return className
-	}
+    render() {
+    	// If not shown, return null
+    	if(!this.props.show) return null
 
-	// Get text if won or lost
-	getWinText = () => {
-		// If selected card is winning card, return winner
-		if(this.context.selected === this.context.winner)
-			return "Winner!"
+        return (
+            <EndScreenContainer>
+                {/* Our div.winText holds information on if user is winner or loser */}
+                <div className="winText">{this.getWinText()}</div>
 
-		return "Loser!"
-	}
+                {/* Button for Try Again. When clicked, resets game */}
+                <button onClick={this.props.reset}>
+                    Try Again
+                </button>
 
-	render() {
-		return (
-			<div className={this.getClassName()}>
-				{/* Our div.class holds information on if user is winner or loser */}
-				<div className="text">{this.getWinText()}</div>
-
-				{/* Button for Try Again. When clicked, resets game */}
-				<button onClick={this.props.reset}>
-					Try Again
-				</button>
-
-				{/* Button to quit. Goes to Google. */}
-				<button onClick={() => window.location = "https://google.com/search?q=other+card+games"}>
-					Quit
-				</button>
-			</div>
-		)
-	}
+                {/* Button to quit. Goes to Google. */}
+                <button onClick={() => window.location = "https://google.com/search?q=other+card+games"}>
+                    Quit
+                </button>
+            </EndScreenContainer>
+        )
+    }
 }
