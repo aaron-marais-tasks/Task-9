@@ -23,9 +23,9 @@ const CardKeyframes = keyframes`
 // Default card styling
 /* Each card should have 8vw width, .5vw side margins, 10vw height, .5vw border radius, and light gray bg color */
 const defaultStyling = css`
-    width: 8vw;
+    width: 11vw;
     margin: 0 .5vw;
-    height: 10vw;
+    height: 15vw;
     background-color: lightgray;
     border-radius: .5vw;
 `

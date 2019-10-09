@@ -11,9 +11,15 @@ import styled from "styled-components"
 export default styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    line-height: 3;
 
     .title {
         text-transform: uppercase;
         font-weight: 600;
+    }
+
+    input {
+    	height: 25px;
     }
 `

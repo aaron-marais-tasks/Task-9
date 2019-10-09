@@ -8,6 +8,9 @@ import React from "react"
 // Import our styled component
 import ConverterContainer from "../StyledComponents/Converter.jsx"
 
+// Import styled item
+import ConverterItem from "../StyledComponents/ConverterItem.jsx"
+
 // Import our item component and its context
 import Item, { ItemProvider } from "./ConverterItem.jsx"
 
@@ -19,11 +22,13 @@ export default function Converter(props) {
     return (
         // Converter container
         <ConverterContainer>
-            {/* Input dollar amount */}
-            Australian Dollar Amount:
+            <ConverterItem>
+                {/* Input dollar amount */}
+                <span className="title">Australian Dollar Amount:</span>
 
-            {/* onChange for input element; sets component state to parsed amount or 0 (if NaN) */}
-            <input type="number" onChange={e => setAudAmount(e.target.value)} /><br/>
+                {/* onChange for input element; sets component state to parsed amount or 0 (if NaN) */}
+                <input type="number" onChange={e => setAudAmount(e.target.value)} />
+            </ConverterItem>
 
             {/* Our items' context provider */}
             <ItemProvider value={{amount: audAmount}}>

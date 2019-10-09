@@ -7,5 +7,5 @@ import styled from "styled-components"
 
 // For now, just a simple styling with small width set
 export default styled.div`
-    width: 27vw;
+    width: 30vw;
 `

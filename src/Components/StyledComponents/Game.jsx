@@ -12,7 +12,6 @@ export default styled.div`
       display: flex;
       flex-direction: row;
       position: relative;
-      margin: 1vw 0;
-      width: calc((8vw + .5vw * 2) * 3);
-      height: 10vw;
+      width: calc((11vw + .5vw * 2) * 3);
+      height: 15vw;
 `
