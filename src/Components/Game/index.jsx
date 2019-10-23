@@ -6,7 +6,7 @@
 import React from "react"
 
 // Import game body's styling
-import GameBody from "../StyledComponents/Game.jsx"
+import GameBody, {GameContainer} from "../StyledComponents/Game.jsx"
 
 // Import card generator and context, and endscreen context
 import {Generate as GenerateCards, CardProvider} from "./GameCard.jsx"
@@ -69,17 +69,21 @@ export default function Game() {
     }
 
     return (
-        // Render our div.game container
-        <GameBody>
-            {/* Generate our 3 cards */}
-            <CardProvider value={cardContext}>
-                {GenerateCards(3)}
-            </CardProvider>
+        <GameContainer>
+            <div>Pick a card below and see if you win!</div>
 
-            {/* Generate end screen */}
-            <EndScreenContext.Provider value={endScreenContextValue}>
-                <EndScreen show={displayStatus} reset={reset} />
-            </EndScreenContext.Provider>
-        </GameBody>
+            {/*Render our div.game container*/}
+            <GameBody>
+                {/* Generate our 3 cards */}
+                <CardProvider value={cardContext}>
+                    {GenerateCards(3)}
+                </CardProvider>
+
+                {/* Generate end screen */}
+                <EndScreenContext.Provider value={endScreenContextValue}>
+                    <EndScreen show={displayStatus} reset={reset} />
+                </EndScreenContext.Provider>
+            </GameBody>
+        </GameContainer>
     )
 }

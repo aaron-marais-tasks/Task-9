@@ -5,6 +5,12 @@
 // Import styled component library
 import styled from 'styled-components'
 
+export const GameContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
+
 // Game box styling
 /* A relative row flexbox, with 1vw top/bottom margin, 10vw height, and width
 	calculated by 8vw (width of card) + 1vw (side margins), * 3 (3 cards) */
